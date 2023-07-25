@@ -8,7 +8,7 @@
 
 npm install (para instalar dependencias)
 
-typeorm ... (para rodar as migrations)
+npm run typeorm migration:run -- -d src/data-source (para rodar as migrations)
 
 npm run dev (para iniciar o servidor)
 
@@ -30,9 +30,9 @@ npm run dev (para iniciar o servidor)
 | POST   | /schedules                 | Agenda uma visita a um imóvel                     | Qualquer usuário, obrigatório token    |
 | GET    | /schedules/realEstate/:id  | lista todos os agendamentos de um imóvel          | Apenas Admnistradores                  |
 
-### **POST - /movies**
+### **POST - /users**
 
-Rota de criação de filmes. A chave **_description_** é **_opcional_**.
+Rota de criação de usuário. 
 
 | Dados de Envio:    |
 | ------------------ |
@@ -40,10 +40,10 @@ Rota de criação de filmes. A chave **_description_** é **_opcional_**.
 
 ```json
 {
-    "id": 40,
-    "duration": 60,
-    "name": "Movie: Sem description",
-    "price": 200
+	"name":"Rafael",
+	"email":"rafael@email.com",
+	"phone":"719999-9999",
+	"password":"123456"
 }
 ```
 
@@ -54,11 +54,11 @@ Rota de criação de filmes. A chave **_description_** é **_opcional_**.
 
 ```json
 {
-    "id": 1,
-    "name": "Movie: Sem description",
-    "description": null,
-    "duration": 60,
-    "price": 200
+	"id": "a955dcd7-0415-4347-8101-b7d52f73481c",
+	"name": "Rafael",
+	"email": "rafael@email.com",
+	"phone": "719999-9999",
+	"createdAt": "2023-07-25"
 }
 ```
 
