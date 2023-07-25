@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 export const userSchema = z.object({
-  id: z.string(),
+  id: z.number(),
   name: z.string().max(45),
   email: z.string().max(45).email(),
   phone: z.string().max(15),
@@ -17,3 +17,9 @@ export const userSchemaRequest = userSchema.omit({
 export const userSchemaResponse = userSchema.omit({
   password: true,
 });
+
+export const userSchemaList = z.array(userSchemaResponse);
+
+export const userSchemaUpdate = userSchema
+  .omit({ id: true, createdAt: true })
+  .partial();

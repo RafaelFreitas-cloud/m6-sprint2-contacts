@@ -7,7 +7,7 @@ import { AppError } from "../errors";
 
 
 export const ensureIdExists = async (req:Request, res:Response, next:NextFunction) => {
-    const userId:string = req.params.id
+    const userId:number = parseInt(req.params.id)
     const userRepository:Repository<User> = AppDataSource.getRepository(User)
 
     const user:TUser | null = await userRepository.findOneBy({id:userId})

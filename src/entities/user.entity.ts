@@ -11,8 +11,8 @@ import {
   
   @Entity("users")
   class User {
-    @PrimaryGeneratedColumn("uuid")
-    id: string;
+    @PrimaryGeneratedColumn("increment")
+    id: number;
   
     @Column({ type: "varchar", length: 45 })
     name: string;

@@ -3,5 +3,4 @@ import { loginSessionController } from "../controllers/login.controllers";
 
 export const loginRoutes: Router = Router()
 
-
 loginRoutes.post('', loginSessionController)

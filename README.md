@@ -19,21 +19,17 @@ npm run dev (para iniciar o servidor)
 | ------ | -------------------------- | ------------------------------------------------- | -------------------------------------- |
 | POST   | /login                     | Gera o token de autenticação                      | Qualquer usuário, não necessita token  |
 | POST   | /users                     | Criação de usuário                                | Qualquer usuário, não necessita token  |
-| GET    | /users                     | Lista todos os usuários                           | Apenas Admnistradores                  |
-| PATCH  | /users/:id                 | Atualiza um usuário                               | Apenas Admnistradores ou dono da conta |
-| DELETE | /users/:id                 | Realiza um soft delete no usuário                 | Apenas Admnistradores                  |
-| POST   | /categories                | Criação de categoria                              | Apenas Admnistradores                  |
-| GET    | /categories                | Lista todas as categorias                         | Qualquer usuário, não necessita token  |
-| GET    | /categories/:id/realEstate | Lista todos imóveis que pertencem a uma categoria | Qualquer usuário, não necessita token  |
-| POST   | /realEstate                | Criação de um imóvel                              | Apenas Admnistradores                  |
-| GET    | /realEstate                | Lista todos os imóveis                            | Qualquer usuário, não necessita token  |
-| POST   | /schedules                 | Agenda uma visita a um imóvel                     | Qualquer usuário, obrigatório token    |
-| GET    | /schedules/realEstate/:id  | lista todos os agendamentos de um imóvel          | Apenas Admnistradores                  |
+| GET    | /users                     | Lista todos os usuários                           | Qualquer usuário, obrigatório token    |
+| PATCH  | /users/:id                 | Atualiza um usuário                               | Obrigatório token e dono da conta      |
+| DELETE | /users/:id                 | Realiza um soft delete no usuário                 | Obrigatório token e dono da conta      |
+
 
 
 ### **POST - /login**
 
 Rota de login do usuário. 
+
+**Url da requisição**: `http://localhost:3000/login`
 
 | Dados de Envio:    |
 | ------------------ |
@@ -60,6 +56,8 @@ Rota de login do usuário.
 ### **POST - /users**
 
 Rota de criação de usuário. 
+
+**Url da requisição**: `http://localhost:3000/users`
 
 | Dados de Envio:    |
 | ------------------ |
@@ -89,11 +87,11 @@ Rota de criação de usuário.
 }
 ```
 
-### **GET - /movies**
+### **GET - /users**
 
-Deve ser possível listar os filmes armazenados no banco de dados. **_Seguindo as regras de paginação_**
+Rota de listagem de todos usuários.
 
-**Url da requisição**: `http://localhost:3000/movies/?sort=price&order=desc&page=2&perPage=3`
+**Url da requisição**: `http://localhost:3000/users`
 
 | Resposta do servidor:                          |
 | ---------------------------------------------- |
@@ -101,41 +99,36 @@ Deve ser possível listar os filmes armazenados no banco de dados. **_Seguindo a
 | Status code: <b style="color:green">200 OK</b> |
 
 ```json
-{
-    "prevPage": "http://localhost:3000/movies?page=1&perPage=3",
-    "nextPage": "http://localhost:3000/movies?page=3&perPage=3",
-    "count": 14,
-    "data": [
-        {
-            "id": 8,
-            "name": "Filme 08",
-            "description": null,
-            "duration": 88,
-            "price": 72
-        },
-        {
-            "id": 4,
-            "name": "Filme 04",
-            "description": null,
-            "duration": 75,
-            "price": 72
-        },
-        {
-            "id": 11,
-            "name": "Filme 11",
-            "description": null,
-            "duration": 7,
-            "price": 68
-        }
-    ]
-}
+[
+	{
+		"id": 1,
+		"name": "Rafael",
+		"email": "rafael@email.com",
+		"phone": "718888-9999",
+		"createdAt": "2023-07-25"
+	},
+	{
+		"id": 2,
+		"name": "Carlos",
+		"email": "carlos@email.com",
+		"phone": "719999-9999",
+		"createdAt": "2023-07-25"
+	},
+	{
+		"id": 3,
+		"name": "Silvia",
+		"email": "silvia@email.com",
+		"phone": "717777-9999",
+		"createdAt": "2023-07-25"
+	}
+]
 ```
 
-### **PATCH - /movies/:id**
+### **PATCH - /users/:id**
 
-Deve ser possível atualizar um filme pelo id recebido nos parâmetros da rota.
+Atualizar o úsuário dono da conta pelo id recebido nos parâmetros da rota.
 
-**Url da requisição**: `http://localhost:3000/movies/4`
+**Url da requisição**: `http://localhost:3000/users/3`
 
 | Dados de Envio:    |
 | ------------------ |
@@ -143,9 +136,8 @@ Deve ser possível atualizar um filme pelo id recebido nos parâmetros da rota.
 
 ```json
 {
-    "id": 55,
-    "duration": 130,
-    "price": 200
+	"name":"Silvia Helena",
+	"phone":"71 6666-5555"
 }
 ```
 
@@ -156,18 +148,17 @@ Deve ser possível atualizar um filme pelo id recebido nos parâmetros da rota.
 
 ```json
 {
-    // repare no valor enviado e no recebido do id
-    "id": 4,
-    "name": "Filme 04",
-    "description": null,
-    "duration": 130,
-    "price": 200
+	"id": 3,
+	"name": "Silvia Helena",
+	"email": "silvia@email.com",
+	"phone": "71 6666-5555",
+	"createdAt": "2023-07-25"
 }
 ```
 
-### **DELETE - /movies/:id**
+### **DELETE - /users/:id**
 
-Deve ser possível deletar um filme pelo id recebido nos parâmetros da rota.
+Deletar o úsuário dono da conta pelo id recebido nos parâmetros da rota.
 
 | Resposta do servidor:                                  |
 | ------------------------------------------------------ |
