@@ -10,7 +10,7 @@ npm install (para instalar dependencias)
 
 typeorm ... (para rodar as migrations)
 
-npm run dev (iniciar o servidor)
+npm run dev (para iniciar o servidor)
 
 
 ## Endpoints:
