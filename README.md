@@ -17,11 +17,11 @@ npm run dev (para iniciar o servidor)
 
 | Método | Endpoint                   | Responsabilidade                                  | Autenticação                           |
 | ------ | -------------------------- | ------------------------------------------------- | -------------------------------------- |
+| POST   | /login                     | Gera o token de autenticação                      | Qualquer usuário, não necessita token  |
 | POST   | /users                     | Criação de usuário                                | Qualquer usuário, não necessita token  |
 | GET    | /users                     | Lista todos os usuários                           | Apenas Admnistradores                  |
 | PATCH  | /users/:id                 | Atualiza um usuário                               | Apenas Admnistradores ou dono da conta |
 | DELETE | /users/:id                 | Realiza um soft delete no usuário                 | Apenas Admnistradores                  |
-| POST   | /login                     | Gera o token de autenticação                      | Qualquer usuário, não necessita token  |
 | POST   | /categories                | Criação de categoria                              | Apenas Admnistradores                  |
 | GET    | /categories                | Lista todas as categorias                         | Qualquer usuário, não necessita token  |
 | GET    | /categories/:id/realEstate | Lista todos imóveis que pertencem a uma categoria | Qualquer usuário, não necessita token  |
@@ -29,6 +29,33 @@ npm run dev (para iniciar o servidor)
 | GET    | /realEstate                | Lista todos os imóveis                            | Qualquer usuário, não necessita token  |
 | POST   | /schedules                 | Agenda uma visita a um imóvel                     | Qualquer usuário, obrigatório token    |
 | GET    | /schedules/realEstate/:id  | lista todos os agendamentos de um imóvel          | Apenas Admnistradores                  |
+
+
+### **POST - /login**
+
+Rota de login do usuário. 
+
+| Dados de Envio:    |
+| ------------------ |
+| Body: Formato Json |
+
+```json
+{
+	"email":"rafael@email.com",
+	"password":"123456"
+}
+```
+
+| Resposta do servidor:                               |
+| --------------------------------------------------- |
+| Body: Formato Json                                  |
+| Status code: <b style="color:green">200 OK</b> |
+
+```json
+{
+	"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJhZmFlbEBlbWFpbC5jb20iLCJpYXQiOjE2OTAzMTU1MzIsImV4cCI6MTY5MDkyMDMzMiwic3ViIjoiYTk1NWRjZDctMDQxNS00MzQ3LTgxMDEtYjdkNTJmNzM0ODFjIn0.czMWiRh1AeEyYyv-k-iCTAUlt8uLTbieKHrEtBm8xlA"
+}
+```
 
 ### **POST - /users**
 
