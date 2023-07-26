@@ -57,7 +57,7 @@ Rota de login do usuário.
 }
 ```
 
-### **GET - /users**
+### **GET - /users/logged**
 
 Rota de listagem de todos usuários.
 
