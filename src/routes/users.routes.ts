@@ -1,15 +1,16 @@
 import { Router } from "express";
 import {
   createUsersController,
-  deleteUsersControler,
-  listUsersControler,
-  updateUserControler,
+  deleteUsersController,
+  listUsersController,
+  updateUserController,
 } from "../controllers/users.controllers";
 import { ensureBodyIsValid } from "../middlewares/ensureBodyIsValid.middleware";
 import { userSchemaRequest, userSchemaUpdate } from "../schemas/user.schema";
 import { ensureEmailNotExists } from "../middlewares/ensureEmailNotExists.middleware";
 import { ensureTokenIsValid } from "../middlewares/ensureTokenIsValid.middleware";
 import { ensureIdExists } from "../middlewares/ensureIdExists.middleware";
+import { ensureIsOwnerAccount } from "../middlewares/ensureIsOwnerAccount.middleware";
 
 export const userRoutes: Router = Router();
 
@@ -20,19 +21,22 @@ userRoutes.post(
   createUsersController
 );
 
-userRoutes.get("", ensureTokenIsValid, listUsersControler);
+userRoutes.get("", ensureTokenIsValid, listUsersController);
 
 userRoutes.patch(
   "/:id",
   ensureTokenIsValid,
   ensureIdExists,
+  ensureIsOwnerAccount,
   ensureBodyIsValid(userSchemaUpdate),
-  updateUserControler
+  ensureEmailNotExists,
+  updateUserController
 );
 
 userRoutes.delete(
   "/:id",
   ensureTokenIsValid,
   ensureIdExists,
-  deleteUsersControler
+  ensureIsOwnerAccount,
+  deleteUsersController
 );

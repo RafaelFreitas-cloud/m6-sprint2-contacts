@@ -21,7 +21,12 @@ npm run dev (para iniciar o servidor)
 | POST   | /users                     | Criação de usuário                                | Qualquer usuário, não necessita token  |
 | GET    | /users                     | Lista todos os usuários                           | Qualquer usuário, obrigatório token    |
 | PATCH  | /users/:id                 | Atualiza um usuário                               | Obrigatório token e dono da conta      |
-| DELETE | /users/:id                 | Realiza um soft delete no usuário                 | Obrigatório token e dono da conta      |
+| DELETE | /users/:id                 | Deletar usuário                                   | Obrigatório token e dono da conta      |
+| POST   | /contacts                  | Criação de contato                                | Qualquer usuário, obrigatório token    |
+| GET    | /contacts                  | Lista todos os contatos                           | Qualquer usuário, obrigatório token    |
+| GET    | /contacts:id               | Retornar contato                                  | Qualquer usuário, obrigatório token    |
+| PATCH  | /contacts:id               | Atualiza um contato                               | Obrigatório token e dono do contato    |
+| DELETE | /contacts:id               | Deletar contato                                   | Obrigatório token e dono do contato    |
 
 
 
@@ -104,22 +109,47 @@ Rota de listagem de todos usuários.
 		"id": 1,
 		"name": "Rafael",
 		"email": "rafael@email.com",
-		"phone": "718888-9999",
-		"createdAt": "2023-07-25"
+		"phone": "712222-9999",
+		"createdAt": "2023-07-26",
+		"contacts": [
+			{
+				"id": 1,
+				"name": "Fernanda",
+				"email": "fernanda@email.com",
+				"phone": "717777-9999",
+				"createdAt": "2023-07-26"
+			},
+			{
+				"id": 2,
+				"name": "Aline",
+				"email": "aline@email.com",
+				"phone": "715555-9999",
+				"createdAt": "2023-07-26"
+			},
+			{
+				"id": 4,
+				"name": "Carol",
+				"email": "carol@email.com",
+				"phone": "714444-9999",
+				"createdAt": "2023-07-26"
+			}
+		]
 	},
 	{
 		"id": 2,
-		"name": "Carlos",
-		"email": "carlos@email.com",
-		"phone": "719999-9999",
-		"createdAt": "2023-07-25"
-	},
-	{
-		"id": 3,
 		"name": "Silvia",
 		"email": "silvia@email.com",
 		"phone": "717777-9999",
-		"createdAt": "2023-07-25"
+		"createdAt": "2023-07-26",
+		"contacts": [
+			{
+				"id": 3,
+				"name": "Carlos",
+				"email": "carlos@email.com",
+				"phone": "717777-9999",
+				"createdAt": "2023-07-26"
+			}
+		]
 	}
 ]
 ```
@@ -169,3 +199,138 @@ Deletar o úsuário dono da conta pelo id recebido nos parâmetros da rota.
 
 ```
 
+### **POST - /contacts**
+
+Rota de criação de contato. 
+
+**Url da requisição**: `http://localhost:3000/contacts`
+
+| Dados de Envio:    |
+| ------------------ |
+| Body: Formato Json |
+
+```json
+{
+	"name":"Fernanda",
+	"email":"fernanda@email.com",
+	"phone":"717777-9999"
+}
+```
+
+| Resposta do servidor:                               |
+| --------------------------------------------------- |
+| Body: Formato Json                                  |
+| Status code: <b style="color:green">201 CREATED</b> |
+
+```json
+{
+	"id": 5,
+	"name":"Fernanda",
+	"email":"fernanda@email.com",
+	"phone":"717777-9999",
+	"createdAt": "2023-07-26"
+}
+```
+
+### **GET - /contacts**
+
+Rota de listagem de todos os contatos do usuário.
+
+**Url da requisição**: `http://localhost:3000/contacts`
+
+| Resposta do servidor:                          |
+| ---------------------------------------------- |
+| Body: Formato Json                             |
+| Status code: <b style="color:green">200 OK</b> |
+
+```json
+[
+	{
+		"id": 1,
+		"name": "Fernanda",
+		"email": "fernanda@email.com",
+		"phone": "717777-9999",
+		"createdAt": "2023-07-26"
+	},
+	{
+		"id": 2,
+		"name": "Felipe",
+		"email": "felipe@email.com",
+		"phone": "717777-9999",
+		"createdAt": "2023-07-26"
+	},
+	{
+		"id": 3,
+		"name": "Hasso",
+		"email": "hasso@email.com",
+		"phone": "717777-9999",
+		"createdAt": "2023-07-26"
+	}
+]
+```
+
+### **GET - /contacts/:id**
+
+Rota de listagem de contato do usuário por id.
+
+**Url da requisição**: `http://localhost:3000/contacts/3`
+
+| Resposta do servidor:                          |
+| ---------------------------------------------- |
+| Body: Formato Json                             |
+| Status code: <b style="color:green">200 OK</b> |
+
+```json
+{
+	"id": 3,
+	"name": "Hasso",
+	"email": "hasso@email.com",
+	"phone": "717777-9999",
+	"createdAt": "2023-07-26"
+}
+```
+
+### **PATCH - /contacts/:id**
+
+Atualizar o contato do úsuário, id recebido nos parâmetros da rota.
+
+**Url da requisição**: `http://localhost:3000/contacts/3`
+
+| Dados de Envio:    |
+| ------------------ |
+| Body: Formato Json |
+
+```json
+{
+	"email":"hassinho@email.com",
+	"phone": "71 6666-9999"
+}
+```
+
+| Resposta do servidor:                          |
+| ---------------------------------------------- |
+| Body: Formato Json                             |
+| Status code: <b style="color:green">200 OK</b> |
+
+```json
+{
+	"id": 3,
+	"name": "Hasso",
+	"email": "hassinho@email.com",
+	"phone": "71 6666-9999",
+	"createdAt": "2023-07-26"
+}
+```
+
+### **DELETE - /contacts/:id**
+
+Deletar contato do úsuário, id recebido nos parâmetros da rota.
+
+| Resposta do servidor:                                  |
+| ------------------------------------------------------ |
+| Body: **Nenhum body deve ser retornado**               |
+| Status code: <b style="color:green">204 NO CONTENT</b> |
+
+```json
+
+```

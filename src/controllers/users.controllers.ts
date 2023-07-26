@@ -13,14 +13,14 @@ export const createUsersController = async (req: Request, res: Response): Promis
   return res.status(201).json(user);
 };
 
-export const listUsersControler = async (req:Request, res:Response):Promise<Response> => {
+export const listUsersController = async (req:Request, res:Response):Promise<Response> => {
     
   const users:TUserList = await listUsersService()
   
   return res.status(200).json(users)
 }
 
-export const updateUserControler = async (req:Request, res:Response):Promise<Response> => {
+export const updateUserController = async (req:Request, res:Response):Promise<Response> => {
   const userId:number = parseInt(req.params.id)
   const updateData:TUserUpdate = req.body
   const logedUserId:number = parseInt(res.locals.userId)
@@ -30,10 +30,9 @@ export const updateUserControler = async (req:Request, res:Response):Promise<Res
   return res.status(200).json(updatedUser)
 }
 
-export const deleteUsersControler = async (req:Request, res:Response):Promise<Response> => {
+export const deleteUsersController = async (req:Request, res:Response):Promise<Response> => {
   const userId = parseInt(req.params.id)
-  const logedUserId:number = parseInt(res.locals.userId)
 
-  const deleteUser = await deleteUserService(userId, logedUserId)
+  const deleteUser = await deleteUserService(userId)
   return res.status(204).send()
 }

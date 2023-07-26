@@ -7,7 +7,6 @@ import "dotenv/config";
 import { TLongin } from "../../interfacers/login.interfaces";
 import User from "../../entities/user.entity";
 
-
 export const loginSessionService = async (
   loginData: TLongin
 ): Promise<string> => {
