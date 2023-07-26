@@ -10,7 +10,6 @@ export const updateUserService = async (
   updateData: TUserUpdate,
   logedUserId: number
 ): Promise<TUserResponse> => {
-
   const userRepository: Repository<User> = AppDataSource.getRepository(User);
 
   const oldUserData: User | null = await userRepository.findOneBy({

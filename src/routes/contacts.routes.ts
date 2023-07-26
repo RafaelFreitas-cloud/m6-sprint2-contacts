@@ -4,12 +4,12 @@ import { ensureBodyIsValid } from "../middlewares/ensureBodyIsValid.middleware";
 import { contactSchemaRequest } from "../schemas/contact.schema";
 import {
   createContactController,
+  deleteContactController,
   listContactsController,
   retrieveContactController,
   updateContactController,
 } from "../controllers/contacts.controllers";
 import { ensureIsObjectOwner } from "../middlewares/ensureIsObjectOwner.middleware";
-import { deleteContactService } from "../services/contacts/deleteContact.service";
 
 export const contactsRoutes: Router = Router();
 
@@ -35,5 +35,5 @@ contactsRoutes.delete(
   "/:id",
   ensureTokenIsValid,
   ensureIsObjectOwner,
-  deleteContactService
+  deleteContactController
 );

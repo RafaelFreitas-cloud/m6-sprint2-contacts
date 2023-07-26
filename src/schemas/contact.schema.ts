@@ -15,7 +15,6 @@ export const contactSchemaRequest = contactSchema.omit({
   createdAt: true,
 });
 
-
 export const contactSchemaList = z.array(contactSchema);
 
 export const contactSchemaUpdate = contactSchema

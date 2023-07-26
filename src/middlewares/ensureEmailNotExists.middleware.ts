@@ -12,11 +12,11 @@ export const ensureEmailNotExists = async (
   const emailRequest: string = req.body.email;
   const userRepository: Repository<User> = AppDataSource.getRepository(User);
 
-  if(emailRequest){
+  if (emailRequest) {
     const user: User | null = await userRepository.findOneBy({
       email: emailRequest,
     });
-  
+
     if (!user) {
       return next();
     } else {
@@ -24,6 +24,5 @@ export const ensureEmailNotExists = async (
     }
   }
 
-  next()
-  
+  next();
 };

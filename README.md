@@ -1,10 +1,11 @@
-# PARA RODAR O PROJETO 
+# PARA RODAR O PROJETO
 
-## Requisitos ##
+## Requisitos
+
 - Ter o Node instalado
 - Ter o nmp instalado (gerenciador de pacotes)
 
-## Fazer os seguintes comandos ##
+## Fazer os seguintes comandos
 
 npm install (para instalar dependencias)
 
@@ -12,27 +13,25 @@ npm run typeorm migration:run -- -d src/data-source (para rodar as migrations)
 
 npm run dev (para iniciar o servidor)
 
-
 ## Endpoints:
 
-| Método | Endpoint                   | Responsabilidade                                  | Autenticação                           |
-| ------ | -------------------------- | ------------------------------------------------- | -------------------------------------- |
-| POST   | /login                     | Gera o token de autenticação                      | Qualquer usuário, não necessita token  |
-| POST   | /users                     | Criação de usuário                                | Qualquer usuário, não necessita token  |
-| GET    | /users                     | Lista todos os usuários                           | Qualquer usuário, obrigatório token    |
-| PATCH  | /users/:id                 | Atualiza um usuário                               | Obrigatório token e dono da conta      |
-| DELETE | /users/:id                 | Deletar usuário                                   | Obrigatório token e dono da conta      |
-| POST   | /contacts                  | Criação de contato                                | Qualquer usuário, obrigatório token    |
-| GET    | /contacts                  | Lista todos os contatos                           | Qualquer usuário, obrigatório token    |
-| GET    | /contacts:id               | Retornar contato                                  | Qualquer usuário, obrigatório token    |
-| PATCH  | /contacts:id               | Atualiza um contato                               | Obrigatório token e dono do contato    |
-| DELETE | /contacts:id               | Deletar contato                                   | Obrigatório token e dono do contato    |
-
-
+| Método | Endpoint      | Responsabilidade             | Autenticação                          |
+| ------ | ------------- | ---------------------------- | ------------------------------------- |
+| POST   | /login        | Gera o token de autenticação | Qualquer usuário, não necessita token |
+| GET    | /users/logged | Retornar usuário logado      | Qualquer usuário, obrigatório token   |
+| POST   | /users        | Criação de usuário           | Qualquer usuário, não necessita token |
+| GET    | /users        | Lista todos os usuários      | Qualquer usuário, obrigatório token   |
+| PATCH  | /users/:id    | Atualiza um usuário          | Obrigatório token e dono da conta     |
+| DELETE | /users/:id    | Deletar usuário              | Obrigatório token e dono da conta     |
+| POST   | /contacts     | Criação de contato           | Qualquer usuário, obrigatório token   |
+| GET    | /contacts     | Lista todos os contatos      | Qualquer usuário, obrigatório token   |
+| GET    | /contacts:id  | Retornar contato             | Qualquer usuário, obrigatório token   |
+| PATCH  | /contacts:id  | Atualiza um contato          | Obrigatório token e dono do contato   |
+| DELETE | /contacts:id  | Deletar contato              | Obrigatório token e dono do contato   |
 
 ### **POST - /login**
 
-Rota de login do usuário. 
+Rota de login do usuário.
 
 **Url da requisição**: `http://localhost:3000/login`
 
@@ -42,25 +41,69 @@ Rota de login do usuário.
 
 ```json
 {
-	"email":"rafael@email.com",
-	"password":"123456"
+  "email": "rafael@email.com",
+  "password": "123456"
 }
 ```
 
-| Resposta do servidor:                               |
-| --------------------------------------------------- |
-| Body: Formato Json                                  |
+| Resposta do servidor:                          |
+| ---------------------------------------------- |
+| Body: Formato Json                             |
 | Status code: <b style="color:green">200 OK</b> |
 
 ```json
 {
-	"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJhZmFlbEBlbWFpbC5jb20iLCJpYXQiOjE2OTAzMTU1MzIsImV4cCI6MTY5MDkyMDMzMiwic3ViIjoiYTk1NWRjZDctMDQxNS00MzQ3LTgxMDEtYjdkNTJmNzM0ODFjIn0.czMWiRh1AeEyYyv-k-iCTAUlt8uLTbieKHrEtBm8xlA"
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJhZmFlbEBlbWFpbC5jb20iLCJpYXQiOjE2OTAzMTU1MzIsImV4cCI6MTY5MDkyMDMzMiwic3ViIjoiYTk1NWRjZDctMDQxNS00MzQ3LTgxMDEtYjdkNTJmNzM0ODFjIn0.czMWiRh1AeEyYyv-k-iCTAUlt8uLTbieKHrEtBm8xlA"
+}
+```
+
+### **GET - /users**
+
+Rota de listagem de todos usuários.
+
+**Url da requisição**: `http://localhost:3000/users/logged`
+
+| Resposta do servidor:                          |
+| ---------------------------------------------- |
+| Body: Formato Json                             |
+| Status code: <b style="color:green">200 OK</b> |
+
+```json
+{
+  "id": 1,
+  "name": "Rafael",
+  "email": "rafael@email.com",
+  "phone": "712222-9999",
+  "createdAt": "2023-07-26",
+  "contacts": [
+    {
+      "id": 1,
+      "name": "Fernanda",
+      "email": "fernanda@email.com",
+      "phone": "717777-9999",
+      "createdAt": "2023-07-26"
+    },
+    {
+      "id": 2,
+      "name": "Aline",
+      "email": "aline@email.com",
+      "phone": "715555-9999",
+      "createdAt": "2023-07-26"
+    },
+    {
+      "id": 4,
+      "name": "Carol",
+      "email": "carol@email.com",
+      "phone": "714444-9999",
+      "createdAt": "2023-07-26"
+    }
+  ]
 }
 ```
 
 ### **POST - /users**
 
-Rota de criação de usuário. 
+Rota de criação de usuário.
 
 **Url da requisição**: `http://localhost:3000/users`
 
@@ -70,10 +113,10 @@ Rota de criação de usuário.
 
 ```json
 {
-	"name":"Rafael",
-	"email":"rafael@email.com",
-	"phone":"719999-9999",
-	"password":"123456"
+  "name": "Rafael",
+  "email": "rafael@email.com",
+  "phone": "719999-9999",
+  "password": "123456"
 }
 ```
 
@@ -84,11 +127,11 @@ Rota de criação de usuário.
 
 ```json
 {
-	"id": "a955dcd7-0415-4347-8101-b7d52f73481c",
-	"name": "Rafael",
-	"email": "rafael@email.com",
-	"phone": "719999-9999",
-	"createdAt": "2023-07-25"
+  "id": "a955dcd7-0415-4347-8101-b7d52f73481c",
+  "name": "Rafael",
+  "email": "rafael@email.com",
+  "phone": "719999-9999",
+  "createdAt": "2023-07-25"
 }
 ```
 
@@ -105,52 +148,52 @@ Rota de listagem de todos usuários.
 
 ```json
 [
-	{
-		"id": 1,
-		"name": "Rafael",
-		"email": "rafael@email.com",
-		"phone": "712222-9999",
-		"createdAt": "2023-07-26",
-		"contacts": [
-			{
-				"id": 1,
-				"name": "Fernanda",
-				"email": "fernanda@email.com",
-				"phone": "717777-9999",
-				"createdAt": "2023-07-26"
-			},
-			{
-				"id": 2,
-				"name": "Aline",
-				"email": "aline@email.com",
-				"phone": "715555-9999",
-				"createdAt": "2023-07-26"
-			},
-			{
-				"id": 4,
-				"name": "Carol",
-				"email": "carol@email.com",
-				"phone": "714444-9999",
-				"createdAt": "2023-07-26"
-			}
-		]
-	},
-	{
-		"id": 2,
-		"name": "Silvia",
-		"email": "silvia@email.com",
-		"phone": "717777-9999",
-		"createdAt": "2023-07-26",
-		"contacts": [
-			{
-				"id": 3,
-				"name": "Carlos",
-				"email": "carlos@email.com",
-				"phone": "717777-9999",
-				"createdAt": "2023-07-26"
-			}
-		]
-	}
+  {
+    "id": 1,
+    "name": "Rafael",
+    "email": "rafael@email.com",
+    "phone": "712222-9999",
+    "createdAt": "2023-07-26",
+    "contacts": [
+      {
+        "id": 1,
+        "name": "Fernanda",
+        "email": "fernanda@email.com",
+        "phone": "717777-9999",
+        "createdAt": "2023-07-26"
+      },
+      {
+        "id": 2,
+        "name": "Aline",
+        "email": "aline@email.com",
+        "phone": "715555-9999",
+        "createdAt": "2023-07-26"
+      },
+      {
+        "id": 4,
+        "name": "Carol",
+        "email": "carol@email.com",
+        "phone": "714444-9999",
+        "createdAt": "2023-07-26"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "name": "Silvia",
+    "email": "silvia@email.com",
+    "phone": "717777-9999",
+    "createdAt": "2023-07-26",
+    "contacts": [
+      {
+        "id": 3,
+        "name": "Carlos",
+        "email": "carlos@email.com",
+        "phone": "717777-9999",
+        "createdAt": "2023-07-26"
+      }
+    ]
+  }
 ]
 ```
 
@@ -166,8 +209,8 @@ Atualizar o úsuário dono da conta pelo id recebido nos parâmetros da rota.
 
 ```json
 {
-	"name":"Silvia Helena",
-	"phone":"71 6666-5555"
+  "name": "Silvia Helena",
+  "phone": "71 6666-5555"
 }
 ```
 
@@ -178,11 +221,11 @@ Atualizar o úsuário dono da conta pelo id recebido nos parâmetros da rota.
 
 ```json
 {
-	"id": 3,
-	"name": "Silvia Helena",
-	"email": "silvia@email.com",
-	"phone": "71 6666-5555",
-	"createdAt": "2023-07-25"
+  "id": 3,
+  "name": "Silvia Helena",
+  "email": "silvia@email.com",
+  "phone": "71 6666-5555",
+  "createdAt": "2023-07-25"
 }
 ```
 
@@ -201,7 +244,7 @@ Deletar o úsuário dono da conta pelo id recebido nos parâmetros da rota.
 
 ### **POST - /contacts**
 
-Rota de criação de contato. 
+Rota de criação de contato.
 
 **Url da requisição**: `http://localhost:3000/contacts`
 
@@ -211,9 +254,9 @@ Rota de criação de contato.
 
 ```json
 {
-	"name":"Fernanda",
-	"email":"fernanda@email.com",
-	"phone":"717777-9999"
+  "name": "Fernanda",
+  "email": "fernanda@email.com",
+  "phone": "717777-9999"
 }
 ```
 
@@ -224,11 +267,11 @@ Rota de criação de contato.
 
 ```json
 {
-	"id": 5,
-	"name":"Fernanda",
-	"email":"fernanda@email.com",
-	"phone":"717777-9999",
-	"createdAt": "2023-07-26"
+  "id": 5,
+  "name": "Fernanda",
+  "email": "fernanda@email.com",
+  "phone": "717777-9999",
+  "createdAt": "2023-07-26"
 }
 ```
 
@@ -245,27 +288,27 @@ Rota de listagem de todos os contatos do usuário.
 
 ```json
 [
-	{
-		"id": 1,
-		"name": "Fernanda",
-		"email": "fernanda@email.com",
-		"phone": "717777-9999",
-		"createdAt": "2023-07-26"
-	},
-	{
-		"id": 2,
-		"name": "Felipe",
-		"email": "felipe@email.com",
-		"phone": "717777-9999",
-		"createdAt": "2023-07-26"
-	},
-	{
-		"id": 3,
-		"name": "Hasso",
-		"email": "hasso@email.com",
-		"phone": "717777-9999",
-		"createdAt": "2023-07-26"
-	}
+  {
+    "id": 1,
+    "name": "Fernanda",
+    "email": "fernanda@email.com",
+    "phone": "717777-9999",
+    "createdAt": "2023-07-26"
+  },
+  {
+    "id": 2,
+    "name": "Felipe",
+    "email": "felipe@email.com",
+    "phone": "717777-9999",
+    "createdAt": "2023-07-26"
+  },
+  {
+    "id": 3,
+    "name": "Hasso",
+    "email": "hasso@email.com",
+    "phone": "717777-9999",
+    "createdAt": "2023-07-26"
+  }
 ]
 ```
 
@@ -282,11 +325,11 @@ Rota de listagem de contato do usuário por id.
 
 ```json
 {
-	"id": 3,
-	"name": "Hasso",
-	"email": "hasso@email.com",
-	"phone": "717777-9999",
-	"createdAt": "2023-07-26"
+  "id": 3,
+  "name": "Hasso",
+  "email": "hasso@email.com",
+  "phone": "717777-9999",
+  "createdAt": "2023-07-26"
 }
 ```
 
@@ -302,8 +345,8 @@ Atualizar o contato do úsuário, id recebido nos parâmetros da rota.
 
 ```json
 {
-	"email":"hassinho@email.com",
-	"phone": "71 6666-9999"
+  "email": "hassinho@email.com",
+  "phone": "71 6666-9999"
 }
 ```
 
@@ -314,11 +357,11 @@ Atualizar o contato do úsuário, id recebido nos parâmetros da rota.
 
 ```json
 {
-	"id": 3,
-	"name": "Hasso",
-	"email": "hassinho@email.com",
-	"phone": "71 6666-9999",
-	"createdAt": "2023-07-26"
+  "id": 3,
+  "name": "Hasso",
+  "email": "hassinho@email.com",
+  "phone": "71 6666-9999",
+  "createdAt": "2023-07-26"
 }
 ```
 

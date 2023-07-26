@@ -14,7 +14,7 @@ export const createContactService = async (
   contactData: TContactRequest,
   userId: number
 ): Promise<TContactResponse> => {
-  const name = contactData.name
+  const name = contactData.name;
 
   const userRepository: Repository<User> = AppDataSource.getRepository(User);
 
@@ -27,7 +27,9 @@ export const createContactService = async (
   const contactsRepository: Repository<Contact> =
     AppDataSource.getRepository(Contact);
 
-  const findContact = await contactsRepository.findOneBy({name:contactData.name})
+  const findContact = await contactsRepository.findOneBy({
+    name: contactData.name,
+  });
 
   if (findContact) {
     throw new AppError("Name already exists", 409);
@@ -40,7 +42,7 @@ export const createContactService = async (
 
   await contactsRepository.save(contact);
 
-  const contactReturn: TContactResponse = contactSchema.parse(contact)
+  const contactReturn: TContactResponse = contactSchema.parse(contact);
 
   return contactReturn;
 };

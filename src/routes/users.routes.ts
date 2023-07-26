@@ -3,6 +3,7 @@ import {
   createUsersController,
   deleteUsersController,
   listUsersController,
+  retrieveLoggedUserController,
   updateUserController,
 } from "../controllers/users.controllers";
 import { ensureBodyIsValid } from "../middlewares/ensureBodyIsValid.middleware";
@@ -22,6 +23,8 @@ userRoutes.post(
 );
 
 userRoutes.get("", ensureTokenIsValid, listUsersController);
+
+userRoutes.get("/logged", ensureTokenIsValid, retrieveLoggedUserController);
 
 userRoutes.patch(
   "/:id",

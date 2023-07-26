@@ -1,3 +1,4 @@
+import { log } from "console";
 import { NextFunction, Request, Response } from "express";
 import { AppError } from "../errors";
 import { Repository } from "typeorm";

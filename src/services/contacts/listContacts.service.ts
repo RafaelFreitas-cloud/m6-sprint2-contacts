@@ -6,8 +6,9 @@ import { contactSchemaList } from "../../schemas/contact.schema";
 import User from "../../entities/user.entity";
 import { AppError } from "../../errors";
 
-export const listContactsService = async (userId:number): Promise<TContactList> => {
-
+export const listContactsService = async (
+  userId: number
+): Promise<TContactList> => {
   const userRepository: Repository<User> = AppDataSource.getRepository(User);
 
   const user = await userRepository.findOneBy({ id: userId });
@@ -16,7 +17,8 @@ export const listContactsService = async (userId:number): Promise<TContactList> 
     throw new AppError("User not found", 404);
   }
 
-  const contactsRepository: Repository<Contact> = AppDataSource.getRepository(Contact);
+  const contactsRepository: Repository<Contact> =
+    AppDataSource.getRepository(Contact);
 
   const contacts: Contact[] = await contactsRepository
     .createQueryBuilder("contact")

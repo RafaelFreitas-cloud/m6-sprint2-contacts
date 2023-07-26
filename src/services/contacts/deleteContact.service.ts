@@ -6,8 +6,8 @@ import Contact from "../../entities/contact.entity";
 export const deleteContactService = async (
   contactId: number
 ): Promise<void> => {
-
-  const contactRepository: Repository<Contact> = AppDataSource.getRepository(Contact);
+  const contactRepository: Repository<Contact> =
+    AppDataSource.getRepository(Contact);
 
   const contact = await contactRepository.findOneBy({ id: contactId });
 

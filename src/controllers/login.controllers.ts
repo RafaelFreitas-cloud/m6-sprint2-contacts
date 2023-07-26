@@ -2,7 +2,6 @@ import { Request, Response } from "express";
 import { TLongin } from "../interfacers/login.interfaces";
 import { loginSessionService } from "../services/login/login.service";
 
-
 export const loginSessionController = async (
   req: Request,
   res: Response

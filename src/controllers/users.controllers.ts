@@ -1,11 +1,20 @@
 import { Request, Response } from "express";
 import { createUsersService } from "../services/users/createUsers.service";
-import { TUserList, TUserRequest, TUserUpdate } from "../interfacers/user.interface";
+import {
+  TUserList,
+  TUserPerfil,
+  TUserRequest,
+  TUserUpdate,
+} from "../interfacers/user.interface";
 import { listUsersService } from "../services/users/listUsers.service";
 import { updateUserService } from "../services/users/updateUser.service";
 import { deleteUserService } from "../services/users/deleteUser.service";
+import { retrieveLoggedUsersService } from "../services/users/retrieveLoggedUsers.service";
 
-export const createUsersController = async (req: Request, res: Response): Promise<Response> => {
+export const createUsersController = async (
+  req: Request,
+  res: Response
+): Promise<Response> => {
   const userData: TUserRequest = req.body;
 
   const user = await createUsersService(userData);
@@ -13,26 +22,44 @@ export const createUsersController = async (req: Request, res: Response): Promis
   return res.status(201).json(user);
 };
 
-export const listUsersController = async (req:Request, res:Response):Promise<Response> => {
-    
-  const users:TUserList = await listUsersService()
-  
-  return res.status(200).json(users)
-}
+export const listUsersController = async (
+  req: Request,
+  res: Response
+): Promise<Response> => {
+  const users: TUserList = await listUsersService();
 
-export const updateUserController = async (req:Request, res:Response):Promise<Response> => {
-  const userId:number = parseInt(req.params.id)
-  const updateData:TUserUpdate = req.body
-  const logedUserId:number = parseInt(res.locals.userId)
-  
+  return res.status(200).json(users);
+};
 
-  const updatedUser = await updateUserService(userId,updateData, logedUserId)
-  return res.status(200).json(updatedUser)
-}
+export const retrieveLoggedUserController = async (
+  req: Request,
+  res: Response
+): Promise<Response> => {
+  const loggedUserId: number = parseInt(res.locals.userId);
 
-export const deleteUsersController = async (req:Request, res:Response):Promise<Response> => {
-  const userId = parseInt(req.params.id)
+  const user: TUserPerfil = await retrieveLoggedUsersService(loggedUserId);
 
-  const deleteUser = await deleteUserService(userId)
-  return res.status(204).send()
-}
+  return res.status(200).json(user);
+};
+
+export const updateUserController = async (
+  req: Request,
+  res: Response
+): Promise<Response> => {
+  const userId: number = parseInt(req.params.id);
+  const updateData: TUserUpdate = req.body;
+  const logedUserId: number = parseInt(res.locals.userId);
+
+  const updatedUser = await updateUserService(userId, updateData, logedUserId);
+  return res.status(200).json(updatedUser);
+};
+
+export const deleteUsersController = async (
+  req: Request,
+  res: Response
+): Promise<Response> => {
+  const userId = parseInt(req.params.id);
+
+  const deleteUser = await deleteUserService(userId);
+  return res.status(204).send();
+};

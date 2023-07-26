@@ -30,7 +30,6 @@ export const userSchemaPerfil = z.object({
   phone: z.string().max(15),
   createdAt: z.string().or(z.date()),
   contacts: z.array(contactSchema),
-  
 });
 
 export const userSchemaList = z.array(userSchemaPerfil);
