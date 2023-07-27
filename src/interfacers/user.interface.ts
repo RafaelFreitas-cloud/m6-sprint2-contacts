@@ -1,4 +1,4 @@
-import { userSchemaPerfil } from './../schemas/user.schema';
+import { userSchemaPerfil } from "./../schemas/user.schema";
 import { z } from "zod";
 import {
   userSchema,
@@ -18,4 +18,4 @@ export type TUserList = z.infer<typeof userSchemaList>;
 
 export type TUserUpdate = DeepPartial<TUserRequest>;
 
-export type TUserPerfil = z.infer<typeof userSchemaPerfil>
+export type TUserPerfil = z.infer<typeof userSchemaPerfil>;

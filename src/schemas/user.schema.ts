@@ -32,4 +32,4 @@ export const userSchemaPerfil = z.object({
   contacts: z.array(contactSchema),
 });
 
-export const userSchemaList = z.array(userSchemaPerfil);
+export const userSchemaList = z.array(userSchemaResponse);

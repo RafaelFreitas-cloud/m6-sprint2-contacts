@@ -7,6 +7,7 @@ import {
 import Contact from "../../entities/contact.entity";
 import { contactSchema } from "../../schemas/contact.schema";
 import User from "../../entities/user.entity";
+import { AppError } from "../../errors";
 
 export const updateContactService = async (
   userId: number,
@@ -15,6 +16,16 @@ export const updateContactService = async (
 ): Promise<TContactResponse> => {
   const contactRepository: Repository<Contact> =
     AppDataSource.getRepository(Contact);
+
+  if (updateData.name) {
+    const findContact = await contactRepository.findOneBy({
+      name: updateData.name,
+    });
+
+    if (findContact) {
+      throw new AppError("Name already exists", 409);
+    }
+  }
 
   const oldContactData = await contactRepository.findOneBy({
     id: contactId,

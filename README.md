@@ -25,9 +25,9 @@ npm run dev (para iniciar o servidor)
 | DELETE | /users/:id    | Deletar usuário              | Obrigatório token e dono da conta     |
 | POST   | /contacts     | Criação de contato           | Qualquer usuário, obrigatório token   |
 | GET    | /contacts     | Lista todos os contatos      | Qualquer usuário, obrigatório token   |
-| GET    | /contacts:id  | Retornar contato             | Qualquer usuário, obrigatório token   |
-| PATCH  | /contacts:id  | Atualiza um contato          | Obrigatório token e dono do contato   |
-| DELETE | /contacts:id  | Deletar contato              | Obrigatório token e dono do contato   |
+| GET    | /contacts/:id | Retornar contato             | Qualquer usuário, obrigatório token   |
+| PATCH  | /contacts/:id | Atualiza um contato          | Obrigatório token e dono do contato   |
+| DELETE | /contacts/:id | Deletar contato              | Obrigatório token e dono do contato   |
 
 ### **POST - /login**
 
@@ -152,47 +152,22 @@ Rota de listagem de todos usuários.
     "id": 1,
     "name": "Rafael",
     "email": "rafael@email.com",
-    "phone": "712222-9999",
-    "createdAt": "2023-07-26",
-    "contacts": [
-      {
-        "id": 1,
-        "name": "Fernanda",
-        "email": "fernanda@email.com",
-        "phone": "717777-9999",
-        "createdAt": "2023-07-26"
-      },
-      {
-        "id": 2,
-        "name": "Aline",
-        "email": "aline@email.com",
-        "phone": "715555-9999",
-        "createdAt": "2023-07-26"
-      },
-      {
-        "id": 4,
-        "name": "Carol",
-        "email": "carol@email.com",
-        "phone": "714444-9999",
-        "createdAt": "2023-07-26"
-      }
-    ]
+    "phone": "717777-9999",
+    "createdAt": "2023-07-26"
   },
   {
     "id": 2,
+    "name": "Pedro",
+    "email": "pedro@email.com",
+    "phone": "716666-9999",
+    "createdAt": "2023-07-26"
+  },
+  {
+    "id": 3,
     "name": "Silvia",
     "email": "silvia@email.com",
-    "phone": "717777-9999",
-    "createdAt": "2023-07-26",
-    "contacts": [
-      {
-        "id": 3,
-        "name": "Carlos",
-        "email": "carlos@email.com",
-        "phone": "717777-9999",
-        "createdAt": "2023-07-26"
-      }
-    ]
+    "phone": "718888-9999",
+    "createdAt": "2023-07-26"
   }
 ]
 ```
@@ -233,6 +208,8 @@ Atualizar o úsuário dono da conta pelo id recebido nos parâmetros da rota.
 
 Deletar o úsuário dono da conta pelo id recebido nos parâmetros da rota.
 
+**Url da requisição**: `http://localhost:3000/users/3`
+
 | Resposta do servidor:                                  |
 | ------------------------------------------------------ |
 | Body: **Nenhum body deve ser retornado**               |
@@ -267,7 +244,7 @@ Rota de criação de contato.
 
 ```json
 {
-  "id": 5,
+  "id": 1,
   "name": "Fernanda",
   "email": "fernanda@email.com",
   "phone": "717777-9999",
@@ -292,21 +269,21 @@ Rota de listagem de todos os contatos do usuário.
     "id": 1,
     "name": "Fernanda",
     "email": "fernanda@email.com",
-    "phone": "717777-9999",
+    "phone": "713333-9999",
     "createdAt": "2023-07-26"
   },
   {
     "id": 2,
     "name": "Felipe",
     "email": "felipe@email.com",
-    "phone": "717777-9999",
+    "phone": "714444-9999",
     "createdAt": "2023-07-26"
   },
   {
     "id": 3,
     "name": "Hasso",
     "email": "hasso@email.com",
-    "phone": "717777-9999",
+    "phone": "715555-9999",
     "createdAt": "2023-07-26"
   }
 ]
@@ -328,7 +305,7 @@ Rota de listagem de contato do usuário por id.
   "id": 3,
   "name": "Hasso",
   "email": "hasso@email.com",
-  "phone": "717777-9999",
+  "phone": "715555-9999",
   "createdAt": "2023-07-26"
 }
 ```
@@ -368,6 +345,8 @@ Atualizar o contato do úsuário, id recebido nos parâmetros da rota.
 ### **DELETE - /contacts/:id**
 
 Deletar contato do úsuário, id recebido nos parâmetros da rota.
+
+**Url da requisição**: `http://localhost:3000/contacts/3`
 
 | Resposta do servidor:                                  |
 | ------------------------------------------------------ |
