@@ -266,17 +266,17 @@ Rota de listagem de todos os contatos do usuário.
 ```json
 [
   {
-    "id": 1,
-    "name": "Fernanda",
-    "email": "fernanda@email.com",
-    "phone": "713333-9999",
-    "createdAt": "2023-07-26"
-  },
-  {
     "id": 2,
     "name": "Felipe",
     "email": "felipe@email.com",
     "phone": "714444-9999",
+    "createdAt": "2023-07-26"
+  },
+  {
+    "id": 1,
+    "name": "Fernanda",
+    "email": "fernanda@email.com",
+    "phone": "713333-9999",
     "createdAt": "2023-07-26"
   },
   {
