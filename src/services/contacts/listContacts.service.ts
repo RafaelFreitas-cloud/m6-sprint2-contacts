@@ -23,6 +23,7 @@ export const listContactsService = async (
   const contacts: Contact[] = await contactsRepository
     .createQueryBuilder("contact")
     .where("contact.user = :userId", { userId: user.id })
+    .orderBy("contact.name", "ASC")
     .getMany();
 
   const contactsReturn = contactSchemaList.parse(contacts);

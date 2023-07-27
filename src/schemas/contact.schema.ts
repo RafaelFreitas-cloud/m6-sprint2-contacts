@@ -1,12 +1,10 @@
 import { z } from "zod";
-// import { ContactGender } from "../entities/contact.entity";
 
 export const contactSchema = z.object({
   id: z.number(),
   name: z.string().max(45),
   email: z.string().max(45).email(),
   phone: z.string().max(15),
-  // gender: z.nativeEnum(ContactGender).nullish(),
   createdAt: z.string().or(z.date()),
 });
 
