@@ -75,29 +75,6 @@ Rota de listagem de todos usuários.
   "email": "rafael@email.com",
   "phone": "712222-9999",
   "createdAt": "2023-07-26",
-  "contacts": [
-    {
-      "id": 1,
-      "name": "Fernanda",
-      "email": "fernanda@email.com",
-      "phone": "717777-9999",
-      "createdAt": "2023-07-26"
-    },
-    {
-      "id": 2,
-      "name": "Aline",
-      "email": "aline@email.com",
-      "phone": "715555-9999",
-      "createdAt": "2023-07-26"
-    },
-    {
-      "id": 4,
-      "name": "Carol",
-      "email": "carol@email.com",
-      "phone": "714444-9999",
-      "createdAt": "2023-07-26"
-    }
-  ]
 }
 ```
 

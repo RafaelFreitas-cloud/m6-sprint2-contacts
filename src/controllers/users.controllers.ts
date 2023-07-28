@@ -2,8 +2,8 @@ import { Request, Response } from "express";
 import { createUsersService } from "../services/users/createUsers.service";
 import {
   TUserList,
-  TUserPerfil,
   TUserRequest,
+  TUserResponse,
   TUserUpdate,
 } from "../interfacers/user.interface";
 import { listUsersService } from "../services/users/listUsers.service";
@@ -37,7 +37,7 @@ export const retrieveLoggedUserController = async (
 ): Promise<Response> => {
   const loggedUserId: number = parseInt(res.locals.userId);
 
-  const user: TUserPerfil = await retrieveLoggedUsersService(loggedUserId);
+  const user: TUserResponse = await retrieveLoggedUsersService(loggedUserId);
 
   return res.status(200).json(user);
 };
