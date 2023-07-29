@@ -18,6 +18,6 @@ app.use("/users", userRoutes);
 app.use("/login", loginRoutes);
 app.use("/contacts", contactsRoutes);
 
-app.use(handleErrors);
+// app.use(handleErrors);
 
 export default app;

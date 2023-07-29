@@ -20,7 +20,7 @@ export const listContactsService = async (
   const contactsRepository: Repository<Contact> =
     AppDataSource.getRepository(Contact);
 
-  const contacts: Contact[] = await contactsRepository
+  const contacts = await contactsRepository
     .createQueryBuilder("contact")
     .where("contact.user = :userId", { userId: user.id })
     .orderBy("contact.name", "ASC")
