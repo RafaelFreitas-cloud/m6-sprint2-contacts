@@ -11,7 +11,7 @@ const app: Application = express();
 
 app.use(json());
 app.use(cors({
-    origin: ["http://localhost:5173","https://m6-sprint2-front.vercel.app/"]
+    origin: ["http://localhost:5173","https://m6-sprint2-front.vercel.app"]
 }))
 
 app.use("/users", userRoutes);
