@@ -27,14 +27,6 @@ export const createContactService = async (
   const contactsRepository: Repository<Contact> =
     AppDataSource.getRepository(Contact);
 
-  const findContact = await contactsRepository.findOneBy({
-    name: contactData.name,
-  });
-
-  if (findContact) {
-    throw new AppError("Name already exists", 409);
-  }
-
   const contact: TContact = contactsRepository.create({
     ...contactData,
     user,

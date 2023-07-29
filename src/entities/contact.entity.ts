@@ -12,7 +12,7 @@ class Contact {
   @PrimaryGeneratedColumn("increment")
   id: number;
 
-  @Column({ type: "varchar", length: 45, unique: true })
+  @Column({ type: "varchar", length: 45 })
   name: string;
 
   @Column({ type: "varchar", length: 45 })
