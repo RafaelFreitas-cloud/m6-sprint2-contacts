@@ -14,7 +14,7 @@
   - **DATABASE_URL = "postgres://(user):(password)@(host):(port)/(database)"**
   - **SECRET_KEY =**
 
-  este arqivo deve-se transformar-se em **.env** e deve-se substituir as informações entre **( )**, com as informações do psql e do database do desenvolverdor e preencher a variável **SECRET_KEY =**
+  este arqivo deve-se transformar-se em **.env** e deve-se substituir as informações entre **( )**, com as informações do psql do desenvolverdor e preencher a variável **SECRET_KEY =**
 
 ## Fazer os seguintes comandos
 
