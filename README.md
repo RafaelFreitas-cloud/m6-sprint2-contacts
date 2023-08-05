@@ -70,7 +70,7 @@ Rota de login do usuário.
 
 ### **GET - /users/logged**
 
-Rota de listagem de todos usuários.
+Rota de listagem de usuário logado.
 
 **Url da requisição**: `http://localhost:3000/users/logged`
 
@@ -115,7 +115,7 @@ Rota de criação de usuário.
 
 ```json
 {
-  "id": "a955dcd7-0415-4347-8101-b7d52f73481c",
+  "id": 1,
   "name": "Rafael",
   "email": "rafael@email.com",
   "phone": "719999-9999",
